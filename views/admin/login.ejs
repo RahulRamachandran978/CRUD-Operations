@@ -1,0 +1,50 @@
+<%- include('./adminHead.ejs') %>
+<section class="gradient-custom cus-bg ">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100" style="padding-bottom: 1.5rem!important;">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem;height: 500px;">
+                    <form action="/admin/login" method="post"  onsubmit="return validateForm()">
+                        <div class="card-body p-5 text-center">
+                            <div class="mb-md-5 mt-md-4 pb-5">
+                                <h2 class="fw-bold mb-2 text-uppercase">Admin Login</h2>
+                                <% if (typeof message !== 'undefined') { %>
+                                    <% if (success) { %>
+                                        <h6 style="color:green;;"><%= message %></h6>
+                                    <% } else { %>
+                                        <h6 style="color:Crimson;font-weight:bold;"><%= message %></h6>
+                                    <% } %>
+                                <% } %>  
+                                <div class="form-outline form-white mb-4">
+                                    <input type="email" id="email" class="form-control form-control-lg" name="email" />
+                                    <label class="form-label"  name="email" for="typeEmailX">Email</label>
+                                </div>
+                                <div id="emailError" class="error-message text-danger"></div>
+
+                                <div class="form-outline form-white mb-4">
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        class="form-control form-control-lg"
+                                        name="password"
+                                    />
+                                    <label class="form-label" name="password" for="typePasswordX">Password</label>
+                                </div>
+                                <div id="passwordError" class="error-message text-danger"></div>  
+
+                                <p class="small"><a class="text-white-50" href="#!">Forgot password?</a></p>
+
+                                <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                            </div>
+                        </div>
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="/javascript/validation.js"></script>
+
+
+<%- include ('./adminFoot.ejs') %>

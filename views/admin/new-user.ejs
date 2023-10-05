@@ -1,0 +1,92 @@
+<%- include('./adminHead.ejs') %>
+  
+  
+ <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/admin/home"><span style="color:darkgreen;font-size: 2em;"><b>Lap-Hub</b></span></a>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/admin/home">Home <span class="sr-only">(current)</span></a>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/admin/new-user">All User</a>
+                  </li>             
+              </ul>
+             
+            <form class="form-inline my-2 my-lg-0" action="/admin/user-search" method="get">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search" aria-label="Search"/>
+                <button class="btn btn-outline-success bg-success text-light my-2 mx-4 my-sm-0" type="submit">Search</button>
+            </form> 
+            <a href="/logout" class="btn btn-outline-danger bg-danger btn-md mx-3 fw-bold text-light p-2">Logout</a>
+             </div> 
+
+        </div>
+    </nav>
+</header> 
+<div class="row" style="padding-left:100px; padding-top: 20px;">
+    <div class="col-md-12">
+      <h3 class="content-title card-title">User List </h3>
+      <div class="card">
+          <div class="" style="margin:50px;">
+            <table class="table table-hover table-bordered">
+                <thead class="table-info">
+                    <tr>    
+                        <th scope="col">Email</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                  <% userData.forEach((user) => { %>
+                    <tr>
+                      <td>
+                        <%= user.email %>
+                      </td>
+                
+                      <%if (user.is_blocked == false) { %>
+                        <td><span class="text-success">Active</span></td>
+                      <% } else { %>
+                        <td><span class="text-danger">Blocked</span></td>
+                      <% } %>
+                
+                      <td>
+                        <div>
+                          <% if (user.is_blocked === false) { %> 
+                            <a class=" btn btn-outline-success bg-success text-light my-2 mx-4 my-sm-0" href="/admin/blockUser?id=<%= user._id %>">
+                              <i class="bx bx-trash me-1"></i> Block
+                            </a>        
+                          <% } else { %> 
+                            <a class="btn btn-outline-success bg-success text-light my-2 mx-4 my-sm-0" href="/admin/unblockUser?id=<%= user._id %>">
+                              <i class="bx bx-trash me-1"></i> Unblock 
+                            </a>
+                          <%} %>
+                        </div>
+                      </td>
+                    </tr>
+                  <% }); %>
+                </tbody>
+                
+            </table>
+            </div>
+        </div>
+      </div>
+    </div>
+   </div>
+  </div>
+  
+
+
+  <%- include ('./adminFoot.ejs') %>
